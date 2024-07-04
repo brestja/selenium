@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 import pytest
 
+#************************************** CREATE PRODUCT ********************************************
+
 def create_product(driver):
     
     driver.get('https://app.dev.gosharpei.com/admin/dashboard')

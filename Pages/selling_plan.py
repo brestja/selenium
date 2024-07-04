@@ -171,6 +171,57 @@ def update_selling_plan(driver):
     # time.sleep(5)
 
     
+#****************************** ADD SELLING PLAN TO A VARIANT *********************************************
 
 
-#************************************ MAIN *************************************************
+def add_selling_plan(driver):
+
+     # Search all buttons
+    buttons = WebDriverWait(driver, 3).until(
+        EC.presence_of_all_elements_located((By.TAG_NAME, "button"))
+    )
+
+    #Recorre todos los botones y obtiene su nombre y texto
+    # for index, button in enumerate(buttons):
+    #     name = button.get_attribute("name")
+    #     text = button.text
+    #     print(f"Botón {index + 1}:")
+    #     print(f"  Nombre: {name}")
+    #     print(f"  Texto: {text}")
+    #     print("---------------------------------------------------")
+    
+    # Click on inventory button
+    buttons[1].click()
+    time.sleep(2)
+    
+    # Click variant in dropdown
+    variant_button = driver.find_element(By.XPATH, '//a[contains(@href, "admin/variants")]')
+    variant_button.click()
+    time.sleep(2)
+    
+    # Search a variant in the variant list
+    variant = driver.find_element(By.XPATH, '//div[contains(@class, "product-sec flex items-center no-wrap cursor-pointer")]')
+    driver.execute_script("arguments[0].scrollIntoView(true);", variant)
+    time.sleep(2)
+    variant.click()
+    time.sleep(2)
+    
+    # Click on edit button
+    edit_variant_button = driver.find_element(By.XPATH, '//button[contains(@class, "q-btn q-btn-item non-selectable no-outline Button_F1 Button_S1 q-ml-md q-btn--outline q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--wrap")]')  
+    edit_variant_button.click()
+    time.sleep(5)
+
+    # Click add selling plan button
+    add_selling_plan_button = driver.find_element(By.XPATH, '//button[contains(@class, "q-btn q-btn-item non-selectable no-outline Button_F1 Button_S1 q-btn--standard q-btn--rectangle text-white q-btn--actionable q-focusable q-hoverable q-btn--wrap")]')
+    add_selling_plan_button.click()
+    time.sleep(5)
+
+    # Search and click toggle button
+    toggle_button = driver.find_element(By.XPATH, '//div[contains(@class, "content-sec selling-content q-card__section q-card__section--vert")]/ul/li/div/div/div/div/div')
+    toggle_button.click()
+    time.sleep(3)
+
+    accept_button = driver.find_element(By.XPATH, '//button[contains(@class, "q-btn q-btn-item non-selectable no-outline active_api q-btn--flat q-btn--rectangle q-btn--actionable q-focusable q-hoverable q-btn--wrap")]')
+    accept_button.click()
+    time.sleep(10)
+    
