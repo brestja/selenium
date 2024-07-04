@@ -122,13 +122,13 @@ def login_prod(driver):
         
         # SEND KEYS
         input_email.send_keys("josebrest25@gmail.com")
-        time.sleep(1)
+        #time.sleep(1)
         input_password.send_keys("Sharpei2023@")
-        time.sleep(1)
+        #time.sleep(1)
         
         # CLICK LOGIN BUTTON
         login_button.click()
-        time.sleep(4)
+        time.sleep(5)
 
 #************************************** CREATE PRODUCT ********************************************
 
@@ -280,48 +280,70 @@ def update_selling_plan(driver):
     selling_plans_button = wait.until(
     EC.element_to_be_clickable((By.XPATH, "//p[contains(@class, 'Body_F2 q-mb-none') and text()='Selling plans']")))
     selling_plans_button.click()
-    time.sleep(10)
+    time.sleep(3)
 
+    #Click edit button
+    button_edits = WebDriverWait(driver, 5).until(
+        EC.presence_of_all_elements_located((By.TAG_NAME, "button"))
+    )  
+    button_edits[5].click()
+    time.sleep(2)
 
-    button_edits = WebDriverWait(driver, 10).until(
+    # Espera a que todos los botones estén presentes
+    buttons = WebDriverWait(driver, 5).until(
         EC.presence_of_all_elements_located((By.TAG_NAME, "button"))
     )
-    
-    button_edits[5].click()
-    time.sleep(10)
 
-    inputs_edit = WebDriverWait(driver, 10).until(
+    # Recorre todos los botones y obtiene su nombre y texto
+    # for index, button in enumerate(buttons):
+    #     name = button.get_attribute("name")
+    #     text = button.text
+    #     print(f"Botón {index + 1}:")
+    #     print(f"  Nombre: {name}")
+    #     print(f"  Texto: {text}")
+    #     print("---------------------------------------------------")
+    # Search las input before click add line
+    inputs_edit = WebDriverWait(driver, 5).until(
         EC.presence_of_all_elements_located((By.TAG_NAME, "input"))
     )
-    for input_element in inputs_edit:
-        input_name = input_element.get_attribute("name")
-        input_info = input_element.get_attribute("value")
-        print(f"Nombre: {input_name}, Info: {input_info}")
-
+    # for index, input_element in enumerate(inputs_edit):
+    #     input_name = input_element.get_attribute("name")
+    #     input_info = input_element.get_attribute("value")
+    #     print(f"Posición: {index + 1}, Nombre: {input_name}, Info: {input_info}")
+    
     # SCROLL DOWN 
     driver.execute_script("arguments[0].scrollIntoView(true);", inputs_edit[19])
+    time.sleep(2)
+    # Click on add line button
+    buttons[11].click()
+    time.sleep(2)
+
+    inputs_edit = WebDriverWait(driver, 5).until(
+        EC.presence_of_all_elements_located((By.TAG_NAME, "input"))
+    )
+    # for index, input_element in enumerate(inputs_edit):
+    #     input_name = input_element.get_attribute("name")
+    #     input_info = input_element.get_attribute("value")
+    #     print(f"Posición: {index + 1}, Nombre: {input_name}, Info: {input_info}")
+
+    inputs_edit[23].send_keys("24")
+    time.sleep(1)
+    inputs_edit[24].send_keys("0")
+    time.sleep(1)
+    inputs_edit[25].send_keys("5")
+    time.sleep(1)
+    inputs_edit[26].send_keys("21")
+
+    time.sleep(2)
+
+    buttons[14].click()
     time.sleep(5)
 
-    # Minimum Temporality
-    inputs_edit[19].clear()
-    time.sleep(1)
-    inputs_edit[19].send_keys("24")
-    time.sleep(1)
-    # Minimum Temporality Billing
-    inputs_edit[20].clear()
-    time.sleep(1)
-    inputs_edit[20].send_keys("0")
-    time.sleep(1)
-    # Period Price
-    inputs_edit[21].clear()
-    time.sleep(1)
-    inputs_edit[21].send_keys("5")
-    time.sleep(1)
-    # Taxes
-    inputs_edit[22].clear()
-    time.sleep(1)
-    inputs_edit[22].send_keys("21")
-    time.sleep(5)
+    # # SCROLL DOWN 
+    # driver.execute_script("arguments[0].scrollIntoView(true);", inputs_edit[19])
+    # time.sleep(5)
+
+    
 
 #************************************ MAIN *************************************************
 
